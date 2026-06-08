@@ -1,0 +1,66 @@
+/* ============================================================
+   BLACKFILE NOTEPAD — delete.css
+   ============================================================ */
+@import url('base.css');
+
+/* ── Confirm card ─────────────────────────────────────────── */
+.confirm-card {
+  background: var(--surface);
+  border: 1px solid var(--red-dim);
+  border-radius: var(--radius-lg);
+  padding: 44px;
+  box-shadow: 0 0 40px rgba(184,64,64,0.08);
+  max-width: 520px;
+}
+
+.confirm-icon {
+  font-size: 2.2rem;
+  display: block;
+  margin-bottom: 24px;
+  opacity: 0.6;
+}
+
+.confirm-title {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  font-weight: 400;
+  margin-bottom: 10px;
+  color: var(--text);
+}
+
+.confirm-note-name {
+  font-style: italic;
+  color: var(--red);
+}
+
+.confirm-sub {
+  font-size: 0.88rem;
+  color: var(--text-dim);
+  line-height: 1.6;
+  margin-bottom: 36px;
+}
+
+.confirm-actions {
+  display: flex;
+  gap: 12px;
+}
+
+/* ── Warning text ─────────────────────────────────────────── */
+.warning-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--red-dim);
+  margin-bottom: 28px;
+}
+
+.warning-label::before {
+  content: '';
+  width: 20px;
+  height: 1px;
+  background: var(--red-dim);
+}

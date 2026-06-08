@@ -1,14 +1,61 @@
 {% load static %}
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'notes/css/home.css' %}">
-    <title>Notes | Home</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static 'notes/css/home.css' %}">
+  <title>Blackfile — Notes</title>
 </head>
 <body>
-    <h1>Home</h1>
+  <div class="page-wrapper">
+
+    <nav class="nav">
+      <a href="{% url 'notes:home' %}" class="nav-brand">
+        Blackfile <span>/ notepad</span>
+      </a>
+      <div class="nav-actions">
+        <a href="{% url 'notes:create' %}" class="btn btn-primary">+ New note</a>
+      </div>
+    </nav>
+
+    <div class="anim-fade-up">
+      <div class="page-header">
+        <span class="page-eyebrow">All notes</span>
+        <h1 class="page-title">Your <em>notes</em></h1>
+      </div>
+
+      <div class="stats-bar">
+        <div class="stat-item">
+          <span class="stat-value">{{ notes_list|length }}</span>
+          <span class="stat-label">total</span>
+        </div>
+      </div>
+    </div>
+
+    {% if notes_list %}
+      <ul class="notes-list">
+        {% for note in notes_list %}
+          <li class="note-item" style="animation-delay: {{ forloop.counter0 }}00ms;">
+            <a href="{% url 'notes:note' note.id %}" class="note-link">
+              <div class="note-link-left">
+                <span class="note-index">{{ forloop.counter|stringformat:"02d" }}</span>
+                <span class="note-title">{{ note.title }}</span>
+              </div>
+              <span class="note-arrow">→</span>
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <div class="empty-state anim-fade-up">
+        <span class="empty-icon">📓</span>
+        <p class="empty-title">Nothing written yet.</p>
+        <p class="empty-sub">Start your first note — it only takes a moment.</p>
+        <a href="{% url 'notes:create' %}" class="btn btn-primary">Write something</a>
+      </div>
+    {% endif %}
+
+  </div>
 </body>
 </html>

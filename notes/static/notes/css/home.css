@@ -1,3 +1,134 @@
-h1 {
-    color: blue;
+/* ============================================================
+   BLACKFILE NOTEPAD — home.css
+   ============================================================ */
+@import url('base.css');
+
+/* ── Stats bar ────────────────────────────────────────────── */
+.stats-bar {
+  display: flex;
+  gap: 32px;
+  margin-bottom: 40px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--border);
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.stat-value {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  color: var(--amber);
+  line-height: 1;
+}
+
+.stat-label {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+}
+
+/* ── Notes list ───────────────────────────────────────────── */
+.notes-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.note-item {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  transition: border-color 0.18s, background 0.18s;
+  animation: fadeUp 0.36s ease both;
+}
+
+.note-item:hover {
+  border-color: var(--border-mid);
+  background: var(--paper);
+}
+
+.note-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 22px;
+  text-decoration: none;
+  gap: 16px;
+}
+
+.note-link-left {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  min-width: 0;
+  flex: 1;
+}
+
+.note-index {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--text-faint);
+  min-width: 22px;
+  flex-shrink: 0;
+}
+
+.note-title {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: color 0.15s;
+}
+
+.note-item:hover .note-title {
+  color: var(--amber);
+}
+
+.note-arrow {
+  font-size: 0.9rem;
+  color: var(--text-faint);
+  flex-shrink: 0;
+  transition: transform 0.18s, color 0.18s;
+}
+
+.note-item:hover .note-arrow {
+  transform: translateX(3px);
+  color: var(--amber-dim);
+}
+
+/* ── Empty state ──────────────────────────────────────────── */
+.empty-state {
+  padding: 80px 0;
+  text-align: center;
+}
+
+.empty-icon {
+  font-size: 3rem;
+  margin-bottom: 20px;
+  opacity: 0.25;
+  display: block;
+}
+
+.empty-title {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 400;
+  font-style: italic;
+  color: var(--text-dim);
+  margin-bottom: 8px;
+}
+
+.empty-sub {
+  font-size: 0.85rem;
+  color: var(--text-faint);
+  margin-bottom: 28px;
 }

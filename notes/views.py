@@ -1,7 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Note
 from .forms import NoteForm
-from django.contrib.auth.decorators import user_passes_test
 
 # Create your views here.
 def home(request):
@@ -25,7 +24,7 @@ def create(request):
         form = NoteForm(request.POST)
         if form.is_valid():
             note = form.save(commit=False)
-            note.user = request.user
+            #note.user = request.user
             note.save()
             return redirect('notes:home')
 

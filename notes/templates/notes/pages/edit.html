@@ -1,11 +1,80 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Notes | Edit</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static 'notes/css/form.css' %}">
+  <title>Blackfile — Edit note</title>
 </head>
 <body>
-    <h1>Edit</h1>
+  <div class="page-wrapper">
+
+    <nav class="nav">
+      <a href="{% url 'notes:home' %}" class="nav-brand">
+        Blackfile <span>/ notepad</span>
+      </a>
+      <div class="nav-actions">
+        <span class="draft-badge"><span class="draft-dot"></span>editing</span>
+      </div>
+    </nav>
+
+    <div class="anim-fade-up">
+      <div class="page-header">
+        <span class="page-eyebrow">Edit note</span>
+        <h1 class="page-title"><em>Revising</em> your note</h1>
+      </div>
+    </div>
+
+    <div class="form-card anim-fade-up anim-delay-1">
+      <form method="post" novalidate>
+        {% csrf_token %}
+
+        <div class="form-group">
+          <div class="field-meta">
+            <label class="form-label" for="id_title">Title</label>
+          </div>
+          <input
+            class="form-input input-title {% if form.title.errors %}is-error{% endif %}"
+            type="text"
+            id="id_title"
+            name="title"
+            value="{{ form.title.value|default:'' }}"
+            placeholder="Note title…"
+            autocomplete="off"
+            autofocus
+          >
+          {% if form.title.errors %}
+            <p class="form-error">{{ form.title.errors.0 }}</p>
+          {% endif %}
+        </div>
+
+        <div class="form-group">
+          <div class="field-meta">
+            <label class="form-label" for="id_content">Content</label>
+          </div>
+          <div class="textarea-wrapper">
+            <textarea
+              class="form-textarea"
+              id="id_content"
+              name="content"
+              placeholder="Start writing…"
+            >{{ form.content.value|default:'' }}</textarea>
+          </div>
+          {% if form.content.errors %}
+            <p class="form-error">{{ form.content.errors.0 }}</p>
+          {% endif %}
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary">Save changes</button>
+          <a href="{% url 'notes:note' form.instance.id %}" class="btn btn-ghost">Cancel</a>
+          <a href="{% url 'notes:delete' form.instance.id %}" class="btn btn-danger" style="margin-left: auto;">Delete</a>
+        </div>
+
+      </form>
+    </div>
+
+  </div>
 </body>
 </html>

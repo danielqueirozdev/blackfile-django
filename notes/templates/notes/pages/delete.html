@@ -1,11 +1,47 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Notes | Delete</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static 'notes/css/delete.css' %}">
+  <title>Blackfile — Delete note</title>
 </head>
 <body>
-    <h1>Delete</h1>
+  <div class="page-wrapper">
+
+    <nav class="nav">
+      <a href="{% url 'notes:home' %}" class="nav-brand">
+        Blackfile <span>/ notepad</span>
+      </a>
+    </nav>
+
+    <div class="anim-fade-up">
+      <div class="confirm-card">
+
+        <span class="warning-label">Destructive action</span>
+
+        <span class="confirm-icon">🗑</span>
+
+        <h1 class="confirm-title">
+          Delete <span class="confirm-note-name">"{{ note.title }}"</span>?
+        </h1>
+
+        <p class="confirm-sub">
+          This will permanently remove the note. There's no undo — once deleted, it's gone for good.
+        </p>
+
+        <form method="post">
+          {% csrf_token %}
+          <div class="confirm-actions">
+            <button type="submit" class="btn btn-danger">Yes, delete it</button>
+            <a href="{% url 'notes:note' note.id %}" class="btn btn-ghost">Keep it</a>
+          </div>
+        </form>
+
+      </div>
+    </div>
+
+  </div>
 </body>
 </html>

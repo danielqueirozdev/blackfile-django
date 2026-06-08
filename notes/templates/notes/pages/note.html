@@ -1,11 +1,51 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Notes | {{ note_title }}</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static 'notes/css/note.css' %}">
+  <title>Blackfile — {{ note_title }}</title>
 </head>
 <body>
-    <h1>Note - {{ note_title }}</h1>
+  <div class="page-wrapper">
+
+    <nav class="nav">
+      <a href="{% url 'notes:home' %}" class="nav-brand">
+        Blackfile <span>/ notepad</span>
+      </a>
+      <div class="nav-actions">
+        <a href="{% url 'notes:edit' note.id %}" class="btn btn-ghost">Edit</a>
+      </div>
+    </nav>
+
+    <div class="anim-fade-up">
+      <nav class="breadcrumb">
+        <a href="{% url 'notes:home' %}" class="breadcrumb-item">Notes</a>
+        <span class="breadcrumb-sep">›</span>
+        <span class="breadcrumb-current">{{ note_title }}</span>
+      </nav>
+
+      <div class="page-header">
+        <span class="page-eyebrow">Note</span>
+        <h1 class="page-title">{{ note_title }}</h1>
+      </div>
+    </div>
+
+    <div class="ruled-line anim-fade-up anim-delay-1"></div>
+
+    <div class="note-content-wrapper anim-fade-up anim-delay-2">
+      <p class="note-body">{% if note.content %}{{ note.content }}{% else %}<em style="color: var(--text-faint);">No content yet.</em>{% endif %}</p>
+    </div>
+
+    <div class="note-actions anim-fade-up anim-delay-3">
+      <div class="note-actions-left">
+        <a href="{% url 'notes:edit' note.id %}" class="btn btn-ghost">Edit note</a>
+        <a href="{% url 'notes:delete' note.id %}" class="btn btn-danger">Delete</a>
+      </div>
+      <a href="{% url 'notes:home' %}" class="btn btn-ghost">← Back</a>
+    </div>
+
+  </div>
 </body>
 </html>
