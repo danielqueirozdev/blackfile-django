@@ -13,9 +13,11 @@ def home(request):
 
 def note(request, id):
     note = get_object_or_404(Note, pk=id)
+    note_title = note.title
 
-    return render(request, 'notes/pages/home.html', {
-        'note': note
+    return render(request, 'notes/pages/note.html', {
+        'note': note,
+        'note_title': note_title,
     })
 
 def create(request):
@@ -41,9 +43,26 @@ def delete(request, id):
         note.delete()
         return redirect('notes:home')
     
-    return render(request, 'notes/pages/create.html', {
+    return render(request, 'notes/pages/delete.html', {
         'note': note
     })
 
 def edit(request, id):
-    ...
+    note = get_object_or_404(Note, pk=id)
+
+    if request.method == 'POST':
+        form = NoteForm(
+            request.POST,
+            instance=note
+        )
+
+        if form.is_valid():
+            form.save()
+            return redirect('notes:home')
+        
+    else:
+        form = NoteForm(instance=note)
+
+    return render(request, 'notes/pages/edit.html', {
+        'form': form,
+    })
