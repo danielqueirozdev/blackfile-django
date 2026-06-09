@@ -1,0 +1,253 @@
+/* ============================================================
+   BLACKFILE NOTEPAD — auth.css  (login + register)
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&family=Lora:ital,wght@0,400;0,600;1,400&display=swap');
+
+/* ── Variables ────────────────────────────────────────────── */
+:root {
+  --bg:         #0e0d0b;
+  --surface:    #161510;
+  --border:     #2e2b22;
+  --border-mid: #3d3928;
+  --text:       #d4cdb8;
+  --text-dim:   #7a7260;
+  --text-faint: #3e3a30;
+  --amber:      #c89a3a;
+  --amber-dim:  #8a6a22;
+  --amber-glow: #c89a3a22;
+  --red:        #b84040;
+  --red-dim:    #7a2828;
+
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body:    'Lora', Georgia, serif;
+  --font-mono:    'IBM Plex Mono', 'Courier New', monospace;
+
+  --radius:    4px;
+  --radius-lg: 8px;
+  --shadow:    0 4px 24px rgba(0,0,0,0.6);
+}
+
+/* ── Reset ────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 16px; }
+
+body {
+  background-color: var(--bg);
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  color: var(--text);
+  font-family: var(--font-body);
+  line-height: 1.7;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 24px;
+}
+
+/* ── Brand header ─────────────────────────────────────────── */
+.auth-brand {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--amber);
+  text-decoration: none;
+  margin-bottom: 40px;
+  opacity: 0.9;
+}
+
+.auth-brand span {
+  color: var(--text-faint);
+  font-size: 0.7rem;
+  margin-left: 8px;
+  letter-spacing: 0.08em;
+}
+
+/* ── Card ─────────────────────────────────────────────────── */
+.auth-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 44px 48px;
+  width: 100%;
+  max-width: 440px;
+  box-shadow: var(--shadow);
+  animation: fadeUp 0.4s ease both;
+}
+
+/* ── Card header ──────────────────────────────────────────── */
+.auth-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--amber-dim);
+  display: block;
+  margin-bottom: 10px;
+}
+
+.auth-title {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 400;
+  color: var(--text);
+  line-height: 1.2;
+  margin-bottom: 32px;
+}
+
+.auth-title em {
+  font-style: italic;
+  color: var(--amber);
+}
+
+/* ── Form elements ────────────────────────────────────────── */
+.form-group {
+  margin-bottom: 22px;
+}
+
+.form-label {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: 8px;
+}
+
+.form-input {
+  width: 100%;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 0.97rem;
+  padding: 11px 14px;
+  outline: none;
+  transition: border-color 0.18s, box-shadow 0.18s;
+}
+
+.form-input:focus {
+  border-color: var(--amber-dim);
+  box-shadow: 0 0 0 3px var(--amber-glow);
+}
+
+.form-input::placeholder {
+  color: var(--text-faint);
+}
+
+/* ── Error & help text ────────────────────────────────────── */
+.form-error {
+  margin-top: 6px;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--red);
+  letter-spacing: 0.04em;
+}
+
+.form-help {
+  margin-top: 5px;
+  font-size: 0.76rem;
+  color: var(--text-faint);
+}
+
+/* ── Messages (success / error) ───────────────────────────── */
+.messages {
+  list-style: none;
+  margin-bottom: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.message {
+  padding: 10px 14px;
+  border-radius: var(--radius);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  border: 1px solid;
+}
+
+.message.success {
+  background: rgba(100, 180, 100, 0.08);
+  border-color: rgba(100, 180, 100, 0.25);
+  color: #7bc47b;
+}
+
+.message.error {
+  background: rgba(184, 64, 64, 0.08);
+  border-color: var(--red-dim);
+  color: var(--red);
+}
+
+/* ── Submit button ────────────────────────────────────────── */
+.btn-submit {
+  width: 100%;
+  background: var(--amber);
+  border: 1px solid var(--amber);
+  border-radius: var(--radius);
+  color: #0e0d0b;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 13px;
+  cursor: pointer;
+  transition: all 0.18s ease;
+  margin-top: 8px;
+}
+
+.btn-submit:hover {
+  background: #d9aa4a;
+  border-color: #d9aa4a;
+  box-shadow: 0 0 20px var(--amber-glow);
+}
+
+/* ── Divider ──────────────────────────────────────────────── */
+.auth-divider {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--border-mid), transparent);
+  margin: 28px 0;
+}
+
+/* ── Footer link ──────────────────────────────────────────── */
+.auth-footer {
+  text-align: center;
+  font-size: 0.82rem;
+  color: var(--text-faint);
+}
+
+.auth-footer a {
+  color: var(--amber-dim);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+
+.auth-footer a:hover {
+  color: var(--amber);
+}
+
+/* ── Scrollbar ────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--border-mid); border-radius: 3px; }
+
+/* ── Animation ────────────────────────────────────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Responsive ───────────────────────────────────────────── */
+@media (max-width: 480px) {
+  .auth-card {
+    padding: 32px 24px;
+  }
+}

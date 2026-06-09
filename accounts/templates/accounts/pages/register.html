@@ -1,0 +1,114 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static 'accounts/css/auth.css' %}">
+  <title>Blackfile — Create account</title>
+</head>
+<body>
+
+  <a href="{% url 'notes:home' %}" class="auth-brand">
+    Blackfile <span>/ notepad</span>
+  </a>
+
+  <div class="auth-card">
+
+    <span class="auth-eyebrow">Get started</span>
+    <h1 class="auth-title">Create an <em>account</em></h1>
+
+    {% if messages %}
+      <ul class="messages">
+        {% for message in messages %}
+          <li class="message {{ message.tags }}">{{ message }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+
+    <form action="{% url 'accounts:register_create' %}" method="POST" novalidate>
+      {% csrf_token %}
+
+      <div class="form-group">
+        <label class="form-label" for="id_username">Username</label>
+        <input
+          class="form-input"
+          type="text"
+          id="id_username"
+          name="username"
+          value="{{ form.username.value|default:'' }}"
+          placeholder="Your username"
+          autocomplete="username"
+          autofocus
+        >
+        {% if form.username.errors %}
+          <p class="form-error">{{ form.username.errors.0 }}</p>
+        {% endif %}
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="id_email">Email</label>
+        <input
+          class="form-input"
+          type="email"
+          id="id_email"
+          name="email"
+          value="{{ form.email.value|default:'' }}"
+          placeholder="Your email address"
+          autocomplete="email"
+        >
+        {% if form.email.errors %}
+          <p class="form-error">{{ form.email.errors.0 }}</p>
+        {% endif %}
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="id_password">Password</label>
+        <input
+          class="form-input"
+          type="password"
+          id="id_password"
+          name="password"
+          placeholder="Your password"
+          autocomplete="new-password"
+        >
+        {% if form.password.errors %}
+          <p class="form-error">{{ form.password.errors.0 }}</p>
+        {% endif %}
+        <p class="form-help">Min. 8 characters, one uppercase, one lowercase, one number.</p>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="id_confirm_password">Confirm password</label>
+        <input
+          class="form-input"
+          type="password"
+          id="id_confirm_password"
+          name="confirm_password"
+          placeholder="Repeat your password"
+          autocomplete="new-password"
+        >
+        {% if form.confirm_password.errors %}
+          <p class="form-error">{{ form.confirm_password.errors.0 }}</p>
+        {% endif %}
+      </div>
+
+      {% if form.non_field_errors %}
+        <p class="form-error" style="margin-bottom: 16px;">
+          {{ form.non_field_errors.0 }}
+        </p>
+      {% endif %}
+
+      <button type="submit" class="btn-submit">Create account</button>
+    </form>
+
+    <div class="auth-divider"></div>
+
+    <p class="auth-footer">
+      Already have an account? <a href="{% url 'accounts:login' %}">Sign in</a>
+    </p>
+
+  </div>
+
+</body>
+</html>

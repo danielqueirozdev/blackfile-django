@@ -1,8 +1,10 @@
-from django.shortcuts import render, redirect, get_object_or_404
 from .models import Note
 from .forms import NoteForm
+from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
+@login_required(login_url='accounts:login')
 def home(request):
     notes_list = Note.objects.all()
 
@@ -10,6 +12,7 @@ def home(request):
         'notes_list': notes_list
     })
 
+@login_required(login_url='accounts:login')
 def note(request, id):
     note = get_object_or_404(Note, pk=id)
     note_title = note.title
@@ -19,12 +22,13 @@ def note(request, id):
         'note_title': note_title,
     })
 
+@login_required(login_url='accounts:login')
 def create(request):
     if request.method == 'POST':
         form = NoteForm(request.POST)
         if form.is_valid():
             note = form.save(commit=False)
-            #note.user = request.user
+            note.user = request.user
             note.save()
             return redirect('notes:home')
 
@@ -35,6 +39,7 @@ def create(request):
         'form': form
     })
 
+@login_required(login_url='accounts:login')
 def delete(request, id):
     note = get_object_or_404(Note, pk=id)
 
@@ -46,6 +51,7 @@ def delete(request, id):
         'note': note
     })
 
+@login_required(login_url='accounts:login')
 def edit(request, id):
     note = get_object_or_404(Note, pk=id)
 

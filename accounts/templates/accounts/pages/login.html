@@ -1,0 +1,76 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static 'accounts/css/auth.css' %}">
+  <title>Blackfile — Sign in</title>
+</head>
+<body>
+
+  <a href="{% url 'notes:home' %}" class="auth-brand">
+    Blackfile <span>/ notepad</span>
+  </a>
+
+  <div class="auth-card">
+
+    <span class="auth-eyebrow">Welcome back</span>
+    <h1 class="auth-title">Sign <em>in</em></h1>
+
+    {% if messages %}
+      <ul class="messages">
+        {% for message in messages %}
+          <li class="message {{ message.tags }}">{{ message }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+
+    <form action="{% url 'accounts:login_create' %}" method="POST" novalidate>
+      {% csrf_token %}
+
+      <div class="form-group">
+        <label class="form-label" for="id_username">Username</label>
+        <input
+          class="form-input"
+          type="text"
+          id="id_username"
+          name="username"
+          value="{{ form.username.value|default:'' }}"
+          placeholder="Your username"
+          autocomplete="username"
+          autofocus
+        >
+        {% if form.username.errors %}
+          <p class="form-error">{{ form.username.errors.0 }}</p>
+        {% endif %}
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="id_password">Password</label>
+        <input
+          class="form-input"
+          type="password"
+          id="id_password"
+          name="password"
+          placeholder="Your password"
+          autocomplete="current-password"
+        >
+        {% if form.password.errors %}
+          <p class="form-error">{{ form.password.errors.0 }}</p>
+        {% endif %}
+      </div>
+
+      <button type="submit" class="btn-submit">Sign in</button>
+    </form>
+
+    <div class="auth-divider"></div>
+
+    <p class="auth-footer">
+      Don't have an account? <a href="{% url 'accounts:register' %}">Create one</a>
+    </p>
+
+  </div>
+
+</body>
+</html>
